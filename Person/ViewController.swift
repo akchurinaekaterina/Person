@@ -44,24 +44,38 @@ class ViewController: UICollectionViewController, UIImagePickerControllerDelegat
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         var selectedPerson = people[indexPath.item]
         
-        let nameAC = UIAlertController(title: "Type the name", message: nil, preferredStyle: .alert)
-        nameAC.addTextField(configurationHandler: nil)
-        nameAC.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        nameAC.addAction(UIAlertAction(title: "Add", style: .default, handler: { [weak nameAC, weak self]  action in
-            guard let text = nameAC?.textFields?[0].text else {return}
-            selectedPerson.name = text
+        let selectAC = UIAlertController(title: "Choose action", message: nil, preferredStyle: .alert)
+        selectAC.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { [weak self] action in
+            self?.people.remove(at: indexPath.item)
             DispatchQueue.main.async {
-                collectionView.reloadData()
+                self?.collectionView.reloadData()
             }
         }))
-        present(nameAC, animated: true, completion: nil)
+        
+        selectAC.addAction(UIAlertAction(title: "Rename", style: .default, handler: { [weak self] action in
+            let nameAC = UIAlertController(title: "Type the name", message: nil, preferredStyle: .alert)
+            nameAC.addTextField(configurationHandler: nil)
+            nameAC.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+            nameAC.addAction(UIAlertAction(title: "Add", style: .default, handler: { [weak nameAC, weak self]  action in
+                guard let text = nameAC?.textFields?[0].text else {return}
+                selectedPerson.name = text
+                DispatchQueue.main.async {
+                    self?.collectionView.reloadData()
+                }
+            }))
+            self?.present(nameAC, animated: true, completion: nil)
+        }))
+        
+        present(selectAC, animated: true, completion: nil)
     }
     // MARK: - add new picture
     @objc func addNewPerson(){
         let picker = UIImagePickerController()
         if UIImagePickerController.isSourceTypeAvailable(.camera) {
-            picker.sourceType = .camera }
-        picker.sourceType = .photoLibrary
+            picker.sourceType = .camera
+        } else {
+            picker.sourceType = .photoLibrary
+            }
         picker.allowsEditing = true
         picker.delegate = self
         present(picker, animated: true, completion: nil)
