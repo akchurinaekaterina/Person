@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BC0A7A7D2524F1AA008A2F10 /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC0A7A7C2524F1AA008A2F10 /* Person.swift */; };
 		BCA827D22523B92400AB96FD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCA827D12523B92400AB96FD /* AppDelegate.swift */; };
 		BCA827D42523B92400AB96FD /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCA827D32523B92400AB96FD /* SceneDelegate.swift */; };
 		BCA827D62523B92400AB96FD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCA827D52523B92400AB96FD /* ViewController.swift */; };
@@ -17,6 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		BC0A7A7C2524F1AA008A2F10 /* Person.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
 		BCA827CE2523B92400AB96FD /* Person.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Person.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BCA827D12523B92400AB96FD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BCA827D32523B92400AB96FD /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -63,6 +65,7 @@
 				BCA827D52523B92400AB96FD /* ViewController.swift */,
 				BCA827D72523B92400AB96FD /* Main.storyboard */,
 				BCA827E62523BF5700AB96FD /* PersonCell.swift */,
+				BC0A7A7C2524F1AA008A2F10 /* Person.swift */,
 				BCA827DA2523B92700AB96FD /* Assets.xcassets */,
 				BCA827DC2523B92700AB96FD /* LaunchScreen.storyboard */,
 				BCA827DF2523B92700AB96FD /* Info.plist */,
@@ -140,6 +143,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BC0A7A7D2524F1AA008A2F10 /* Person.swift in Sources */,
 				BCA827D62523B92400AB96FD /* ViewController.swift in Sources */,
 				BCA827D22523B92400AB96FD /* AppDelegate.swift in Sources */,
 				BCA827E72523BF5700AB96FD /* PersonCell.swift in Sources */,
