@@ -9,11 +9,19 @@ import UIKit
 
 class ViewController: UICollectionViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
+    
     var people = [Person]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
+        // load the array
+        let defaults = UserDefaults.standard
+        if let savedPeople = defaults.object(forKey: "people") as? Data {
+            if let decodedPeople = try? NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(savedPeople) as? [Person] {
+                people = decodedPeople
+            }
+        }// Do any additional setup after loading the view.
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addNewPerson))
     }
     
@@ -49,6 +57,7 @@ class ViewController: UICollectionViewController, UIImagePickerControllerDelegat
             self?.people.remove(at: indexPath.item)
             DispatchQueue.main.async {
                 self?.collectionView.reloadData()
+                self?.save()
             }
         }))
         
@@ -61,6 +70,7 @@ class ViewController: UICollectionViewController, UIImagePickerControllerDelegat
                 selectedPerson.name = text
                 DispatchQueue.main.async {
                     self?.collectionView.reloadData()
+                    self?.save()
                 }
             }))
             self?.present(nameAC, animated: true, completion: nil)
@@ -90,6 +100,7 @@ class ViewController: UICollectionViewController, UIImagePickerControllerDelegat
         }
         let person = Person(name: "Unknown", image: imageName)
         people.append(person)
+        save()
         collectionView.reloadData()
         dismiss(animated: true, completion: nil)
         
@@ -98,6 +109,12 @@ class ViewController: UICollectionViewController, UIImagePickerControllerDelegat
     func getDocumentsDirectory() -> URL {
         let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
         return paths[0]
+    }
+    func save() {
+        if let savedData = try? NSKeyedArchiver.archivedData(withRootObject: people, requiringSecureCoding: false) {
+            let defaults = UserDefaults.standard
+            defaults.set(savedData, forKey: "people")
+        }
     }
 
 
